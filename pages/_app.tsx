@@ -25,6 +25,12 @@ const theme = extendTheme({
             boxShadow: "none",
           },
         },
+        auth: {
+          backgroundColor: "green.500",
+          ":hover": {
+            backgroundColor: "green.300",
+          },
+        },
       },
     },
   },
@@ -33,9 +39,13 @@ const theme = extendTheme({
 const MyApp = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
-      <PlayerLayout>
+      {Component.authPage ? (
         <Component {...pageProps} />
-      </PlayerLayout>
+      ) : (
+        <PlayerLayout>
+          <Component {...pageProps} />
+        </PlayerLayout>
+      )}
     </ChakraProvider>
   );
 };
