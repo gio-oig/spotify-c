@@ -30,6 +30,8 @@ async function createUser(email: string, password: string) {
     update: {},
     create: {
       email,
+      firstName: "Giorgi",
+      lastName: "Arakhamia",
       password: bcrypt.hashSync(password, salt),
     },
   });

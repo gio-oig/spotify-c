@@ -35,6 +35,7 @@ const GradientLayout = ({
           </Text>
         </Box>
       </Flex>
+      {children}
     </Box>
   );
 };
