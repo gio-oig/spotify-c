@@ -40,5 +40,6 @@ module.exports = {
       },
     ],
     'prettier/prettier': 'warn',
+    "@typescript-eslint/no-explicit-any": ["error"],
   },
 }

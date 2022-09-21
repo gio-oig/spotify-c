@@ -1,6 +1,8 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import 'reset-css';
-import PlayerLayout from '../components/PlayerLayout';
+import { StoreProvider } from "easy-peasy";
+import "reset-css";
+import PlayerLayout from "../components/PlayerLayout";
+import { store } from "../lib/store";
 
 const theme = extendTheme({
   colors: {
@@ -14,7 +16,7 @@ const theme = extendTheme({
       700: "#616161",
       800: "#424242",
       900: "#212121",
-    }
+    },
   },
   components: {
     Button: {
@@ -22,22 +24,34 @@ const theme = extendTheme({
         link: {
           ":focus": {
             outlone: "none",
-            boxShadow: "none"
+            boxShadow: "none",
+          },
+        },
+        auth: {
+          backgroundColor: "green.500",
+          ":hover": {
+            backgroundColor: "green.300",
           },
         },
       },
-    }
-  }
-})
+    },
+  },
+});
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   return (
     <ChakraProvider theme={theme}>
-      <PlayerLayout>
-        <Component {...pageProps} />
-      </PlayerLayout>
+      <StoreProvider store={store}>
+        {Component.authPage ? (
+          <Component {...pageProps} />
+        ) : (
+          <PlayerLayout>
+            <Component {...pageProps} />
+          </PlayerLayout>
+        )}
+      </StoreProvider>
     </ChakraProvider>
-  )
-}
+  );
+};
 
-export default MyApp
+export default MyApp;
